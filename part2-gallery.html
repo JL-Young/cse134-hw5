@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./stylesheet.css">
+  <script src="scripts.js"></script>
   <title>Project Gallery</title>
   <!--
       Add CSS as you like linked or otherwise, but encapsulate most within the card components.  
@@ -10,10 +13,28 @@
       You should also include the script code separately.  You may wish to have individual files 
       for the customElement vs the page layout and CRUD actions if you do them. Regardless of 
       what you do you use ES modules and vanilla JS.
-    -->
+    --> 
 </head>
 
 <body>
+  <h1>Project Gallery</h1>
+    
+  <noscript>
+    <p>Please enable JavaScript for the proper function of this site.</p>
+  </noscript>
+
+    <label>Load Controls:</label>
+    <input type="button" id="loadLocalBtn" value="Load Local">
+    <input type="button" id="loadRemoteBtn" value="Load Remote">
+  
+  <template>
+    <project-card>
+      <h2></h2>
+      <img>
+      <p></p>
+      <a></a>
+    </project-card>  
+  </template>
   <!--
       This page will contain a list of cards which will contain cards that overview each project in 
       your portfolio. You will dynamically create these cards as CustomElements using JavaScript 
