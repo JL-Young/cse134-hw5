@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./stylesheet.css">
-  <script src="scripts.js"></script>
+  <script src="proj-card.js"></script>
   <title>Project Gallery</title>
   <!--
       Add CSS as you like linked or otherwise, but encapsulate most within the card components.  
@@ -20,13 +20,16 @@
   <h1>Project Gallery</h1>
     
   <noscript>
-    <p>Please enable JavaScript for the proper function of this site.</p>
+    <p>Please enable JavaScript for this site to function.</p>
   </noscript>
 
     <label>Load Controls:</label>
     <input type="button" id="loadLocalBtn" value="Load Local">
     <input type="button" id="loadRemoteBtn" value="Load Remote">
   
+  <output id="localOut"></output>
+  <output id="remoteOut"></output>
+
   <template>
     <project-card>
       <h2></h2>
