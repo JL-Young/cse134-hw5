@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./stylesheet.css">
+  <script src="./crud.js" defer></script>
+  <title>CRUD Demo</title>
+</head>
+
+<body>
+  <h1>CRUD Demo</h1>
+  <p>Return to<a href="./index.html"></a>Project Gallery</p>
+
+  <fieldset>
+    <label>CRUD Controls:</label>
+    <form id="crudForm">
+      <label for="operation">Select Operation:</label>
+      <select id="operation" required>
+        <option value="create">Create</option>
+        <option value="read">Read</option>
+        <option value="update">Update</option>
+        <option value="delete">Delete</option>
+      </select>
+
+      <label for="index">Index:</label>
+      <input type="number" id="index">
+
+      <label for="name">Name:</label>
+      <input type="text" id="name">
+
+      <label for="txt">Description:</label>
+      <textarea id="txt"></textarea>
+
+      <input type="submit" value="Submit">
+    </form>
+  </fieldset>
+
+  <output id="crudCards"></output>
+
+</body>
+</html>

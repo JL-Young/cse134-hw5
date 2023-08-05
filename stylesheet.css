@@ -15,19 +15,6 @@
     --revelle-blue    : rgb(000, 048, 135);
     --revelle-gold    : rgb(255, 209, 000);
     --soft-black      : rgb(24, 26, 24);
-
-    --color1 : #ee6055;
-    --color2 : #60d394;
-    --color3 : #aaf683;
-    --color4 : #ffd97d;
-    --color5 : #ff9b85;
-
-    --darkcolor1 : black;
-    --darkcolor2 : darkslategray;
-    --darkcolor3 : darkgreen;
-    --darkcolor4 : darkgoldenrod;
-    --darkcolor5 : darkred;
-    --darkcolor6 : darkmagenta;
 }
 
 * {
@@ -39,7 +26,13 @@ h1 {
     font-size: var(--step-3);
 }
 
-project-card {
+output {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+project-card, crud-card {
     display        : flex;
     flex-direction : row;
     background     : var(--parchment-white);
@@ -50,18 +43,16 @@ project-card {
     padding        : var(--space-m);
 }
 
-project-card > h2 {
+crud-card {
+    flex-direction: column;
+}
+
+project-card > h2, crud-card > h2 {
     flex      : 1;
     font-size : var(--step-2);
 }
 
-project-card > img {
-    flex       : 1;
-    max-width  : 100%;
-    object-fit : cover;
-}
-
-project-card > p {
+project-card > p, crud-card > p {
     flex       : 3;
 }
 
