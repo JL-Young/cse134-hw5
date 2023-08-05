@@ -26,6 +26,10 @@ h1 {
     font-size: var(--step-3);
 }
 
+a {
+    color     : var(--link-color);
+}
+
 output {
     display: flex;
     flex-direction: column;
@@ -54,8 +58,4 @@ project-card > h2, crud-card > h2 {
 
 project-card > p, crud-card > p {
     flex       : 3;
-}
-
-project-card a {
-    color     : var(--link-color);
 }
