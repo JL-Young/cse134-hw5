@@ -73,12 +73,12 @@ const localData = [
 localStorage.setItem('localData', JSON.stringify(localData));
 
 function fetchLocal() {
-    const data = JSON.parse(localStorage.getItem('localData'));
+    let data = JSON.parse(localStorage.getItem('localData'));
     return data;
 }
   
 function loadCard(data) {
-    const projectCard = document.createElement('project-card');
+    let projectCard = document.createElement('project-card');
     projectCard.projectName = data.name;
     projectCard.projectImg  = data.img;
     projectCard.projectAlt  = data.alt;
@@ -88,7 +88,7 @@ function loadCard(data) {
 }
 
 document.getElementById('loadLocalBtn').addEventListener('click', () => {
-    const data = fetchLocal();
+    let data = fetchLocal();
     if (Array.isArray(data) && data.length > 0) {
         const projectCards = document.getElementById('projectCards');
         projectCards.innerHTML = '';
@@ -99,3 +99,37 @@ document.getElementById('loadLocalBtn').addEventListener('click', () => {
         });
     }
 });
+
+async function fetchRemote() {
+    let url = 'https://api.jsonbin.io/v3/b/64cda5d59d312622a38c1bbe';
+    let apiKey = '$2b$10$XEInXxQ2eAtfkEH6thoKC.pQgMZKTq3jAWSsy8YA7igSh.euZ1yQK';
+  
+console.log(url);
+    let response = await fetch(url, {
+      headers: {
+        'X-Master-Key': apiKey,
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error('Remote server fetch error');
+    }
+  
+    let data = await response.json();
+    return data;
+  }
+
+document.getElementById('loadRemoteBtn').addEventListener('click', async () => {
+    try {
+      const data = await fetchRemote();
+      if (data) {
+        const projectCards = document.getElementById('projectCards');
+        projectCards.innerHTML = '';
+  
+        const projectCard = loadCard(data);
+        projectCards.appendChild(projectCard);
+      }
+    } catch (error) {
+      console.error('Error fetching data from remote server:', error.message);
+    }
+  });
