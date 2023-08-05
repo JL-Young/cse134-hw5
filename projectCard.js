@@ -4,10 +4,10 @@ class projectCard extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.innerHTML = `
-            <h2>Default title</h2>
-            <img alt='Default alt'>
-            <p>Default description</p>
-            <a href='#'>Read More</a>
+            <h2></h2>
+            <img>
+            <p></p>
+            <a>Read More</a>
         `;
     }
 
@@ -63,7 +63,7 @@ const localData = [
     {
         "name" : "Thurgood Marshall",
         "img"  : "assets/marshall-logo.png",
-        "alt"  : "Marshall college logo",
+        "alt"  : "Marshall College logo",
         "txt"  : "The student as scholar and citizen: social responsibility and academic excellence are equally important...",
         "url"  : "https://marshall.ucsd.edu/"
     }
@@ -77,7 +77,7 @@ function fetchLocal() {
     return data;
 }
   
-function loadCard(data) {
+function loadLocal(data) {
     let projectCard = document.createElement('project-card');
     projectCard.projectName = data.name;
     projectCard.projectImg  = data.img;
@@ -85,7 +85,7 @@ function loadCard(data) {
     projectCard.projectTxt  = data.txt;
     projectCard.projectURL  = data.url;
     return projectCard;
-}
+} 
 
 document.getElementById('loadLocalBtn').addEventListener('click', () => {
     let data = fetchLocal();
@@ -94,30 +94,47 @@ document.getElementById('loadLocalBtn').addEventListener('click', () => {
         projectCards.innerHTML = '';
   
         data.forEach((project) => {
-            const projectCard = loadCard(project);
+            const projectCard = loadLocal(project);
             projectCards.appendChild(projectCard);
         });
     }
 });
 
 async function fetchRemote() {
-    let url = 'https://api.jsonbin.io/v3/b/64cda5d59d312622a38c1bbe';
+    let binUrl = 'https://api.jsonbin.io/v3/b/64cda5d59d312622a38c1bbe';
     let apiKey = '$2b$10$XEInXxQ2eAtfkEH6thoKC.pQgMZKTq3jAWSsy8YA7igSh.euZ1yQK';
+
+    let response = await fetch(binUrl, {
+        method: 'GET',
+        headers: {
+            'X-Master-Key': apiKey,
+        },
+    }); 
+
+    if (!response.ok) {
+        throw new Error('Remote server fetch error');
+    }
+
+    let data = await response.text();
+    data = JSON.parse(data);
+    return data;
+}
+
+function loadRemote(data) {
+    const projectCards = document.createDocumentFragment();
   
-console.log(url);
-    let response = await fetch(url, {
-      headers: {
-        'X-Master-Key': apiKey,
-      },
+    data.record.forEach((project) => {
+      const projectCard = document.createElement('project-card');
+      projectCard.projectName = project.name;
+      projectCard.projectImg = project.img;
+      projectCard.projectAlt = project.alt;
+      projectCard.projectTxt = project.txt;
+      projectCard.projectURL = project.url;
+      projectCards.appendChild(projectCard);
     });
   
-    if (!response.ok) {
-      throw new Error('Remote server fetch error');
-    }
-  
-    let data = await response.json();
-    return data;
-  }
+    return projectCards;
+}
 
 document.getElementById('loadRemoteBtn').addEventListener('click', async () => {
     try {
@@ -126,10 +143,10 @@ document.getElementById('loadRemoteBtn').addEventListener('click', async () => {
         const projectCards = document.getElementById('projectCards');
         projectCards.innerHTML = '';
   
-        const projectCard = loadCard(data);
+        const projectCard = loadRemote(data);
         projectCards.appendChild(projectCard);
-      }
+        }
     } catch (error) {
       console.error('Error fetching data from remote server:', error.message);
     }
-  });
+});
