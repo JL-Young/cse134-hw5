@@ -41,9 +41,7 @@ h1 {
 
 project-card {
     display        : flex;
-    flex-direction : column;
-    width          : auto;
-    height         : fit-content;
+    flex-direction : row;
     background     : var(--parchment-white);
     gap            : var(--space-m);
     margin         : var(--space-l);
@@ -52,13 +50,20 @@ project-card {
     padding        : var(--space-m);
 }
 
-project-card > h2 {
-    font-size: var(--step-2);
+h2 {
+    color: var(--revelle-gold);
+    flex      : 1;
+    font-size : var(--step-2);
 }
 
 project-card > img {
+    flex       : 1;
     max-width  : 100%;
     object-fit : cover;
+}
+
+project-card > p {
+    flex       : 3;
 }
 
 project-card a {
