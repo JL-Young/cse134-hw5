@@ -69,7 +69,7 @@ function readCards() {
   if (Array.isArray(data) && data.length > 0) {
     loadCard(data);
   } else {
-    alert('No data available. Please add data using the "Create" section.');
+    alert('No cards to show. Please add cards using the "Create" operation.');
   }
 }
 
@@ -132,18 +132,20 @@ crudForm.addEventListener('submit', (event) => {
       readCards();
       break;
     case 'update':
-      if (!index) {
-        alert('Please enter the Index field for Update operation.');
+      if (!(index >= 0)) {
+        alert('Please enter a valid Index for Update operation.');
         return;
       }
       updateData(index, name, txt);
+      readCards();
       break;
     case 'delete':
-      if (!index) {
-        alert('Please enter the Index field for Delete operation.');
+      if (!(index >= 0)) {
+        alert('Please enter a valid Index for Delete operation.');
         return;
       }
       deleteData(index);
+      readCards();
       break;
     default:
       alert('Invalid operation selected.');
